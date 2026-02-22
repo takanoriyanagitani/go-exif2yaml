@@ -1,0 +1,52 @@
+version: "2"
+
+linters:
+
+  default: all
+
+  disable:
+    - wsl
+    - wsl_v5
+    - ireturn
+    - nlreturn
+    - revive
+    - mnd
+    - wrapcheck
+    - forbidigo
+
+  settings:
+
+    depguard:
+      rules:
+        main:
+          files:
+            - $all
+          allow:
+            - $gostd
+            - github.com/tetratelabs/wazero
+            - github.com/takanoriyanagitani/go-exif2yaml
+            - github.com/takanoriyanagitani/go-map2yaml
+            - github.com/takanoriyanagitani/go-map2yaml/ser/goccy
+          deny:
+            - pkg: unsafe
+
+    nolintlint:
+      require-specific: true
+      require-explanation: true
+      allow-unused: false
+      allow-no-explanation:
+        - gochecknoglobals
+
+    govet:
+      enable-all: true
+      disable:
+      - fieldalignment
+
+    staticcheck:
+      checks:
+      - all
+      - -QF1011
+      - -QF1008
+      - -ST1017
+      - -ST1023
+      - -ST1000
